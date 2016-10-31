@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Springmvcfirst1208</display-name>
+  <servlet>
+  	<servlet-name>springmvc</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<!-- contextConfigLocation配置springmvc加載的配置文件(配置處理器映射器、適配器等)
+  		如果不配置contextConfigLocation，默認加載的是/WEB-INF/servlet名稱-servlet.xml(springmvc-servlet.xml)
+  	 -->
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:springmvc.xml</param-value>
+  	</init-param>
+  </servlet>
+  <servlet-mapping>
+  <!--  
+  	第一種：*.action，訪問以.action結尾由DispatcherServlet進行解析
+  	第二種：/，所有訪問的地址都由DispatcherServlet進行解析，對於靜態文件的解析需要配置不讓DispatcherServlet進行解析
+  	使用這種方式可以實現RESTFUL風格的url
+  	第三種：/*，使用這種配置，最終要轉發到一個jsp頁面，仍然會由DispatcherServlet解析jsp地址，不能根據jsp頁面找到handler，會報錯
+  -->
+  	<servlet-name>springmvc</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 可以掃描controller、service，指定controller的包名 -->
+	<context:component-scan base-package="com.app.chx.controller"></context:component-scan>
+
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" /> -->
+
+	<!--使用mvc:annotation-driven代替上邊註解映射器和註解適配器配置
+		mvc:annotation-driven默認加載很多的參數綁定方法，比如json轉換解析器就默認加載了，
+		如果使用mvc:annotation-driven不用配置上邊的RequestMappingHandlerAdapter和RequestMappingHandlerMapping
+		實際開發時使用mvc:annotation-driven
+	-->
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- <bean name="/queryItems.action" class="com.app.chx.controller.ItemsController" /> -->
+
+	<!-- 處理器映射器 將bean的name作為url進行查找，需要在配置Handler時指定beanname(就是url) -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleServletHandlerAdapter" />
+
+	<!-- 處理器適配器所有處理器適配器都實現HandlerAdapter接口 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+	<!-- 視圖解析器
+	解析jsp，默認使用jstl標籤，classpath下的得有jstl的包
+	 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+</beans>
